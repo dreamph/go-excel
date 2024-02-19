@@ -1,4 +1,4 @@
-module go-excel
+module github.com/dreamph/go-excel
 
 go 1.22.0
 

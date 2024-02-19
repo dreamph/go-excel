@@ -1,4 +1,4 @@
-package sodau
+package excel
 
 import (
 	"github.com/xuri/excelize/v2"
@@ -6,7 +6,7 @@ import (
 
 type OnRow func(rowIndex int, rowData []string) error
 
-type ExcelReader interface {
+type Reader interface {
 	Read(sheetName string, startRow int, onRow OnRow) error
 	GetCellValue(sheetName string, cellName string) (string, error)
 	ExistsSheet(sheetName string) bool
@@ -20,7 +20,7 @@ func (r *excelReader) GetCellValue(sheetName string, cellName string) (string, e
 	return r.File.GetCellValue(sheetName, cellName)
 }
 
-func NewExcelReader(file *excelize.File) ExcelReader {
+func NewReader(file *excelize.File) Reader {
 	return &excelReader{File: file}
 }
 
@@ -55,32 +55,3 @@ func (r *excelReader) ExistsSheet(sheetName string) bool {
 	}
 	return index != -1
 }
-
-type Data struct {
-	ID   string
-	Name string
-	Age  int
-}
-
-/*
-func main() {
-	filePath := "/Users/dream/Data/go/src/sodau/Book2.xlsx"
-	excelReader := NewExcelReader()
-
-	var datas []Data
-	err := excelReader.Read(filePath, "Sheet1", 1, func(rowIndex int, rowData []string) error {
-		data := Data{}
-		data.ID = rowData[0]
-		data.Name = rowData[1]
-		data.Age, _ = strconv.Atoi(rowData[2])
-		datas = append(datas, data)
-		return nil
-	})
-	if err != nil {
-		fmt.Print(err.Error())
-	}
-	fmt.Println(len(datas))
-
-}
-
-*/

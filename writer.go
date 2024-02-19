@@ -1,10 +1,10 @@
-package sodau
+package excel
 
 import (
 	"github.com/xuri/excelize/v2"
 )
 
-type ExcelWriter interface {
+type Writer interface {
 	Write(sheetName string, CellName string, data interface{}) error
 	WriteList(list []DataRef) error
 	SaveAs(filePath string) error
@@ -15,15 +15,7 @@ type excelWriter struct {
 	file *excelize.File
 }
 
-func (e *excelWriter) ToBytes() ([]byte, error) {
-	return ToBytes(e.file)
-}
-
-func (e *excelWriter) SaveAs(filePath string) error {
-	return e.file.SaveAs(filePath)
-}
-
-func NewExcelWriter(file *excelize.File) ExcelWriter {
+func NewWriter(file *excelize.File) Writer {
 	return &excelWriter{file: file}
 }
 
@@ -66,6 +58,14 @@ func (e *excelWriter) WriteList(list []DataRef) error {
 	return nil
 }
 
+func (e *excelWriter) ToBytes() ([]byte, error) {
+	return ToBytes(e.file)
+}
+
+func (e *excelWriter) SaveAs(filePath string) error {
+	return e.file.SaveAs(filePath)
+}
+
 /*
 	GenerateExcelAsBytes for create excel by configs
     var configs []excel.GenerateExcelConfig[models.ActivityData]
@@ -91,7 +91,7 @@ func (e *excelWriter) WriteList(list []DataRef) error {
 func GenerateExcelAsBytes[T any](sheetName string, startAtRowIndex int, configs *[]GenerateExcelConfig[T], dataList *[]T) ([]byte, error) {
 	f := excelize.NewFile()
 	defer Close(f)
-	excelWriter := NewExcelWriter(f)
+	excelWriter := NewWriter(f)
 
 	var list []DataRef
 	currentRow := startAtRowIndex

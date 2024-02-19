@@ -1,4 +1,4 @@
-package sodau
+package excel
 
 import (
 	"fmt"
