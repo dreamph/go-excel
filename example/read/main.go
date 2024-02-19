@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 
 	"github.com/dreamph/go-excel"
-	"github.com/xuri/excelize/v2"
 )
 
 type Data struct {
@@ -22,12 +21,7 @@ func main() {
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
-	defer func(excelFile *excelize.File) {
-		err := excelFile.Close()
-		if err != nil {
-
-		}
-	}(excelFile)
+	defer excel.Close(excelFile)
 
 	excelReader := excel.NewReader(excelFile)
 
