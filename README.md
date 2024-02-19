@@ -1,12 +1,5 @@
 ## Basic Usage
 
-### Installation
-
-```bash
-go install github.com/dreamph/go-excel
-```
-
-# Example
 # Read
 ```go
 package main
