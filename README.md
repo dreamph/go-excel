@@ -5,22 +5,21 @@
 package main
 
 import (
-"fmt"
-"log"
-"path/filepath"
+    "fmt"
+    "log"
+    "path/filepath"
 
 	"github.com/dreamph/go-excel"
 )
 
 type Data struct {
-ID   string
-Name string
-Age  int
+    ID   string
+    Name string
+    Age  int
 }
 
 func main() {
-filePath := "example/read/read.xlsx"
-
+    filePath := "example/read/read.xlsx"
 	excelFile, err := excel.OpenFile(filepath.Clean(filePath))
 	if err != nil {
 		log.Fatalf(err.Error())

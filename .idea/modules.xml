@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/sodau.iml" filepath="$PROJECT_DIR$/.idea/sodau.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/go-excel.iml" filepath="$PROJECT_DIR$/.idea/go-excel.iml" />
     </modules>
   </component>
 </project>
